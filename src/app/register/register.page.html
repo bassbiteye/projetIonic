@@ -1,0 +1,57 @@
+<ion-header>
+    <ion-toolbar>
+      <ion-title>
+         register
+      </ion-title>
+    </ion-toolbar>
+  </ion-header>
+  
+  <ion-content color="" padding>
+    <form #form="ngForm" (ngSubmit)="register(form)">
+      <ion-grid>
+        <ion-row color="" justify-content-center>
+          <ion-col align-self-center size-md="6" size-lg="5" size-xs="12">
+            <div text-center>
+              <h3>register</h3>
+            </div>
+            <div padding>
+              <ion-item>
+                    <ion-input name="nom" type="text" placeholder="nom" #nom="ngModel" [(ngModel)]="registerUserData.nom" required></ion-input>
+              </ion-item>
+
+              <ion-item>
+                      <ion-input name="prenom" type="text" placeholder="prenom" #prenom="ngModel" [(ngModel)]="registerUserData.prenom"  required></ion-input>
+                </ion-item>
+                <ion-item>
+                    <ion-input name="telephone" type="text" placeholder="telephone" #telephone="ngModel" [(ngModel)]="registerUserData.telephone"  required></ion-input>
+              </ion-item>
+
+              <ion-item>
+                <ion-input name="username" type="text" placeholder="username" #username="ngModel" [(ngModel)]="registerUserData.username" required></ion-input>
+              </ion-item>
+              <ion-item>
+                <ion-input name="password" type="password" placeholder="Password" #password="ngModel" [(ngModel)]="registerUserData.password" required></ion-input>
+              </ion-item>
+              <ion-list>                
+                  <ion-item>
+                    <ion-label ngModel name="name">profile</ion-label>
+                    <ion-select [(ngModel)]="registerUserData.name" name="name">
+                      <ion-select-option *ngFor="let prof of listeProfile"   [value]="prof.name">{{prof.name}}</ion-select-option>
+                    </ion-select>
+                  </ion-item>
+                </ion-list>
+            </div>
+            <div>
+                        <img hidden src="imageUrl"   style="width:200px;height:100px" class="form-control" />
+                     <input type="file"   class="col-lg-4 control-label" #Image accept="image/*" (change)="handleFileInput($event.target.files)"  ngModel    name="imageName" required>
+                 <div class="validation-error text-danger" *ngIf="Image.invalid && Image.touched">Choisir une Image.</div>
+            </div>
+            <div padding>
+              <ion-button size="large" type="submit" [disabled]="form.invalid" expand="block">Login</ion-button>
+            </div>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </form>
+  </ion-content>
+  

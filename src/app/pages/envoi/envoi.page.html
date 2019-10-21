@@ -1,0 +1,89 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+      </ion-buttons>
+    <ion-title>
+       envoi
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+<ion-content color="" padding class="backForm">
+  <form #form="ngForm" (ngSubmit)="envoi(form)">
+    <ion-grid *ngIf="!next">
+      <ion-row color="" justify-content-center>
+        <ion-col align-self-center size-md="6" size-lg="5" size-xs="12">
+          <div text-center>
+            <h3>Expéditeur</h3>
+          </div>
+          <div padding>
+            <ion-item>
+                  <ion-input name="nomE" type="text" placeholder="nom" #nomE="ngModel" [(ngModel)]="EnvoiData.nomE" class="form-control"  required></ion-input>
+                  <div class="validation-error text-danger" *ngIf="nomE.invalid && nomE.touched">je veux savoir votre nom.</div>
+                </ion-item>
+            <ion-item>
+                    <ion-input name="prenomE" type="text" placeholder="prenom" #prenomE="ngModel" [(ngModel)]="EnvoiData.prenomE"  class="form-control" required></ion-input>
+                    <div class="validation-error text-danger" *ngIf="prenomE.invalid && prenomE.touched">je veux savoir votre prenom aussi.</div>
+                  </ion-item>
+              <ion-item>
+                  <ion-input name="telephoneE" type="text" placeholder="telephone" #telephoneE="ngModel" [(ngModel)]="EnvoiData.telephoneE"  class="form-control" required></ion-input>
+                  <div class="validation-error text-danger" *ngIf="telephoneE.invalid && telephoneE.touched">je veux savoir votre numéro.</div>
+            </ion-item>
+          </div>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+    
+    <ion-grid *ngIf="next">
+      <ion-row color="" justify-content-center>
+        <ion-col align-self-center size-md="6" size-lg="5" size-xs="12">
+          <div text-center>
+            <h3>Bénéficiaire</h3>
+          </div>
+          <div padding>
+            <ion-item>
+                  <ion-input name="nomb" type="text" placeholder="nom" #nomb="ngModel" [(ngModel)]="EnvoiData.nomb" class="form-control"  required></ion-input>
+                  <div class="validation-error text-danger" *ngIf="nomb.invalid && nomb.touched">je veux savoir votre nom.</div>
+                </ion-item>
+            <ion-item>
+                    <ion-input name="prenomb" type="text" placeholder="prenom" #prenomb="ngModel" [(ngModel)]="EnvoiData.prenomb"  class="form-control" required></ion-input>
+                    <div class="validation-error text-danger" *ngIf="prenomb.invalid && prenomb.touched">je veux savoir votre prenom aussi.</div>
+                  </ion-item>
+              <ion-item>
+                  <ion-input name="telephoneb" type="number" placeholder="telephone" #telephoneb="ngModel" [(ngModel)]="EnvoiData.telephoneb"  class="form-control" required></ion-input>
+                  <div class="validation-error text-danger" *ngIf="telephoneb.invalid && telephoneb.touched">je veux savoir votre numéro.</div>
+            </ion-item>
+          </div>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+    <ion-grid *ngIf="last">
+      <ion-row color="" justify-content-center>
+        <ion-col align-self-center size-md="6" size-lg="5" size-xs="12">
+          <div text-center>
+            <h3>Montant</h3>
+          </div>
+          <div padding>
+            <ion-item>
+              <ion-input name="montantTransaction" type="number" placeholder="montant" #montantTransaction="ngModel" [(ngModel)]="EnvoiData.montantTransaction"  class="form-control" (keyup)="frais($event)" required></ion-input>
+              <div class="validation-error text-danger" *ngIf="montantTransaction.invalid && montantTransaction.touched">je veux savoir le montant .</div>
+        </ion-item>
+        <ion-item>
+          <div *ngIf="tarif">frais {{tarif.frais}} fcfa</div>
+          
+            <ion-label>frais à ma charge</ion-label>
+            <ion-toggle [(ngModel)]="wiki" color="success"></ion-toggle>
+          
+        </ion-item>
+          </div>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+<div class="row send">
+    <ion-button size="small"  (click)="nextForm()"   [disabled]="form.invalid" *ngIf="!next && !last" color="success" >Suivant</ion-button>
+    <ion-button color="danger" size="small"  (click)="nextForm()"  [disabled]="form.invalid" *ngIf="next && !last" >precedent</ion-button>
+    <ion-button color="success" size="small"  (click)="nextForm()"  [disabled]="form.invalid" *ngIf="!last" >Suivant</ion-button>
+    <ion-button color="secondary" size="large" type="submit" [disabled]="form.invalid"  *ngIf="last" expand="block">envoyer</ion-button>
+  </div>
+</form>
+</ion-content>

@@ -6,9 +6,10 @@ const routes: Routes = [
   { path: 'home', loadChildren: () => import('./home/home.module').then( m => m.HomePageModule)},
   { path: 'acceuil', loadChildren: './acceuil/acceuil.module#AcceuilPageModule' },
   { path: 'partenaire', loadChildren: './pages/partenaire/partenaire.module#PartenairePageModule' },
-  { path: 'user', loadChildren: './pages/user/user.module#UserPageModule' },
   { path: 'transaction', loadChildren: './pages/transaction/transaction.module#TransactionPageModule' },
-  { path: 'recharge', loadChildren: './pages/recharge/recharge.module#RechargePageModule' },
+  { path: 'register', loadChildren: './register/register.module#RegisterPageModule' },
+  { path: 'addpar', loadChildren: './pages/partenaire/addpar/addpar.module#AddparPageModule' },
+  { path: 'envoi', loadChildren: './pages/envoi/envoi.module#EnvoiPageModule' },
 ];
 
 @NgModule({

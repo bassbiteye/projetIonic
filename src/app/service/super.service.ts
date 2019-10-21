@@ -5,7 +5,7 @@ import { Partenaire } from '../model/partenaire';
   providedIn: 'root'
 })
 export class SuperService {
-  private url = "http://localhost:8000/api";
+  private url = 'http://localhost:8000/api';
 
 
   constructor(private http: HttpClient) { }

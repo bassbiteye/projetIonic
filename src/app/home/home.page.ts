@@ -1,4 +1,4 @@
-import { NavController } from '@ionic/angular';
+import { NavController,LoadingController } from '@ionic/angular';
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../service/auth.service';
 import { Router } from '@angular/router';
@@ -19,28 +19,44 @@ export class HomePage {
   imageName : any;
   roles :any
   valuRole= false;
+  loading : any;
+
   constructor(private _auth:AuthService,
-              private _router: Router) { }
+              private _router: Router,
+              private loadingCtl: LoadingController) { }
+
+async presentLoading() {
+  const loading = await this.loadingCtl.create({
+    message: 'please wait',
+    duration: 2000
+  });
+  await loading.present();
+
+  await loading.onDidDismiss();
+
+  console.log('Loading dismissed!');
+}
   login (form) {
 
     this._auth.loginUser(form.value).subscribe((res) => {
            if(!res.code){
-          localStorage.setItem('token', res.token);
-          const Decode=this.jwt.decodeToken(res.token);
-          localStorage.setItem('username', Decode.username);
-          localStorage.setItem('roles', Decode.roles[0]);
-          localStorage.setItem('nom', Decode.nom);
-          localStorage.setItem('prenom', Decode.prenom);
-          localStorage.setItem('expiration', Decode.exp);
-          localStorage.setItem('imageName', Decode.imageName);
-          this.prenom= res.prenom;
-          this.imageName= res.imageName;
-          this.nom= res.nom;
-          this.roles= res.roles;
-          this.authenticate();
-          this._router.navigateByUrl('acceuil');
-          //window.location.reload()
+             this.presentLoading();
+             localStorage.setItem('token', res.token);
+             const Decode=this.jwt.decodeToken(res.token);
+             localStorage.setItem('username', Decode.username);
+             localStorage.setItem('roles', Decode.roles[0]);
+             localStorage.setItem('nom', Decode.nom);
+             localStorage.setItem('prenom', Decode.prenom);
+             localStorage.setItem('expiration', Decode.exp);
+             localStorage.setItem('imageName', Decode.imageName);
+             this.prenom= res.prenom;
+             this.imageName= res.imageName;
+             this.nom= res.nom;
+             this.roles= res.roles;
+             this.authenticate();
+             this._router.navigateByUrl('acceuil');
         }else{
+          this.presentLoading();
           localStorage.setItem('message',res.message);
           this.message = res.message;
         }

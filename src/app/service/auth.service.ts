@@ -30,7 +30,7 @@ export class AuthService {
     formData.append('prenom', User.prenom);
     formData.append('nom', User.nom);
     formData.append('telephone', User.telephone);
-    formData.append('libelle', User.libelle);
+    formData.append('name', User.name);
     return this.http
       .post(urerUrl, formData).pipe(catchError(this.errorHandler));
   }

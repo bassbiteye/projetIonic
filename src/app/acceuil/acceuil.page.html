@@ -1,10 +1,42 @@
-<ion-menu contentId="content" side="start">
 <ion-header>
-    <ion-toolbar color="primary">
-    <ion-title>menu </ion-title>
+  <ion-toolbar color="dark">
+    <ion-title text-center>
+      Dashboard
+    </ion-title>
   </ion-toolbar>
 </ion-header>
+
+<ion-content>
+  <section text-center margin-bottom>
+    <ion-icon name="person"></ion-icon>
+    <h1 style="font-size:1.4em" no-margin>Welcome, <br>
+      Mr. John Doe</h1>
+  </section>
+  <ion-item>
+    <ion-badge slot="start"></ion-badge>
+    <ion-button  *ngIf="!_trans" routerLink="/envoi" routerLinkActive="active">Envoyer</ion-button>
+    <ion-badge slot="end"><ion-icon name="send"></ion-icon></ion-badge>
+  </ion-item>
+  <ion-item>
+    <ion-badge slot="start"></ion-badge>
+    <ion-button size="full" *ngIf="!_trans" routerLink="/envoi" routerLinkActive="active">retirer</ion-button>
+    <ion-badge slot="end"><ion-icon name="undo"></ion-icon></ion-badge>
+  </ion-item>
+  <ion-item>
+    <ion-badge slot="start"></ion-badge>
+    <ion-button >detail</ion-button>
+    <ion-badge slot="end"><ion-icon name="sync"></ion-icon></ion-badge>
+  </ion-item>
+  
+
+  
+</ion-content>
+
+
 <ion-content></ion-content>
 
-</ion-menu>
-<router-outlet id="content" main></router-outlet>
+<ion-footer>
+  <ion-toolbar>
+    <ion-title>Deconnexion</ion-title>
+  </ion-toolbar>
+</ion-footer>

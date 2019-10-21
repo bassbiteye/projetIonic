@@ -1,0 +1,98 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+      </ion-buttons>
+    <ion-title>
+       partenaire
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+<ion-content color="" padding class="backForm">
+  <form #form="ngForm" (ngSubmit)="addPar(form)">
+    <ion-grid *ngIf="!next">
+      <ion-row color="" justify-content-center>
+        <ion-col align-self-center size-md="6" size-lg="5" size-xs="12">
+          <div text-center>
+            <h3>Entreprise</h3>
+          </div>
+          <div padding>
+            <ion-item>
+                  <ion-input name="raisonSocial" type="text" placeholder="raison Social" #raisonSocial="ngModel" [(ngModel)]="addparData.raisonSocial"  class="form-control"required></ion-input>
+                  <div class="validation-error text-danger" *ngIf="raisonSocial.invalid && raisonSocial.touched">Ta raison Sociale ne doit pas etre vide</div>
+                </ion-item>
+
+            <ion-item>
+                    <ion-input name="ninea" type="text" placeholder="ninea" #ninea="ngModel" [(ngModel)]="addparData.ninea" class="form-control" required></ion-input>
+                    <div class="validation-error text-danger" *ngIf="ninea.invalid && ninea.touched">Le numero de NINEA SVP.</div>
+                  </ion-item>
+              <ion-item>
+                  <ion-input name="adresse" type="text" placeholder="adresse" #adresse="ngModel" [(ngModel)]="addparData.adresse" class="form-control" required></ion-input>
+                  <div class="validation-error text-danger" *ngIf="adresse.invalid && adresse.touched">je veux savoir  l'adresse mél de votre entreprise.</div>
+                </ion-item>
+
+            <ion-item>
+              <ion-input name="fix" type="text" placeholder=" nuemero fix" #fix="ngModel" [(ngModel)]="addparData.fix" class="form-control" required></ion-input>
+              <div class="validation-error text-danger" *ngIf="fix.invalid && fix.touched">Renseigner numero  il doit etre 9 chiffres.</div>
+            </ion-item>
+            <ion-item>
+              <ion-input name="mail" type="text" placeholder="mail" #mail="ngModel" [(ngModel)]="addparData.mail" class="form-control" required></ion-input>
+              <div class="validation-error text-danger" *ngIf="mail.invalid && mail.touched">je veux savoir votre adresse.</div>
+            </ion-item>
+            <ion-item>
+              <ion-label position="floating">Description</ion-label>
+              <ion-textarea  name="Description" #Description="ngModel" [(ngModel)]="addparData.Description" class="form-control" required></ion-textarea>
+              <div class="validation-error text-danger" *ngIf="Description.invalid && Description.touched">mettez une Description de votre Entreprise.</div>
+            </ion-item>
+          </div>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </form>
+
+  <form #form="ngForm" (ngSubmit)="addPar(form)">
+    <ion-grid *ngIf="next">
+      <ion-row color="" justify-content-center>
+        <ion-col align-self-center size-md="6" size-lg="5" size-xs="12">
+          <div text-center>
+            <h3>Responsable</h3>
+          </div>
+          <div padding>
+            <ion-item>
+                  <ion-input name="nom" type="text" placeholder="nom" #nom="ngModel" [(ngModel)]="addparData.nom" class="form-control"  required></ion-input>
+                  <div class="validation-error text-danger" *ngIf="nom.invalid && nom.touched">je veux savoir votre nom.</div>
+                </ion-item>
+            <ion-item>
+                    <ion-input name="prenom" type="text" placeholder="prenom" #prenom="ngModel" [(ngModel)]="addparData.prenom"  class="form-control" required></ion-input>
+                    <div class="validation-error text-danger" *ngIf="prenom.invalid && prenom.touched">je veux savoir votre prenom aussi.</div>
+                  </ion-item>
+              <ion-item>
+                  <ion-input name="telephone" type="text" placeholder="telephone" #telephone="ngModel" [(ngModel)]="addparData.telephone"  class="form-control" required></ion-input>
+                  <div class="validation-error text-danger" *ngIf="telephone.invalid && telephone.touched">je veux savoir votre numéro.</div>
+            </ion-item>
+            <ion-item>
+              <ion-input name="username" type="text" placeholder="username" #username="ngModel" [(ngModel)]="addparData.username" class="form-control"  required></ion-input>
+              <div class="validation-error text-danger" *ngIf="username.invalid && username.touched">Creer un Login.</div>
+            </ion-item>
+            <ion-item>
+              <ion-input name="password" type="password" placeholder="Password" #password="ngModel" [(ngModel)]="addparData.password" class="form-control"  required></ion-input>
+              <div class="validation-error text-danger" *ngIf="password.invalid && password.touched">Creer un password.</div>
+            </ion-item>
+          </div>
+          <div>
+                      <img hidden src="imageUrl"   style="width:200px;height:100px" class="form-control" />
+                   <input type="file"   class="col-lg-4 control-label" #Image accept="image/*" (change)="handleFileInput($event.target.files)"  ngModel    name="imageName" required>
+          </div>
+          <div padding>
+          </div>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+ 
+<div class="row send">
+    <ion-button size="small"  (click)="nextForm()" *ngIf="!next" >Suivant</ion-button>
+    <ion-button size="small"  (click)="nextForm()" *ngIf="next" >precedent</ion-button>
+    <ion-button color="secondery" size="large" type="submit" [disabled]="form.invalid" *ngIf="next" expand="block">enregistrer</ion-button>
+  </div>
+</form>
+</ion-content>

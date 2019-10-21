@@ -2,6 +2,8 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { RouteReuseStrategy } from '@angular/router';
 import { AuthService } from './service/auth.service';
+import { AuthGuard } from './auth.guard';
+import {TokenInterceptorService} from './service/token-interceptor.service';
 import { HttpClientModule,HTTP_INTERCEPTORS  } from '@angular/common/http';
 import { IonicModule, IonicRouteStrategy } from '@ionic/angular';
 import { SplashScreen } from '@ionic-native/splash-screen/ngx';
@@ -13,13 +15,18 @@ import { from } from 'rxjs';
 @NgModule({
   declarations: [AppComponent ],
   entryComponents: [],
-  imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule,HttpClientModule],
+  imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule, HttpClientModule],
   providers: [
     StatusBar,
     SplashScreen,
     AuthService,
-    { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
-  ],
+    AuthGuard,
+    { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
+
+    { provide: HTTP_INTERCEPTORS,
+      useClass: TokenInterceptorService,
+      multi: true }
+      ],
   bootstrap: [AppComponent]
 })
 export class AppModule {}

@@ -1,0 +1,23 @@
+<ion-menu contentId="content" side="start">
+<ion-header>
+    <ion-toolbar color="primary">
+    <ion-title>menu </ion-title>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+<div *ngFor="let p of pages">
+<ion-menu-toggle *ngIf="p.url">
+  <ion-item [routerLink]="p.url" routerDirection="root" routerLinkActive="active" >
+    <ion-icon [name]="p.icon" slot="start"></ion-icon>
+        <ion-label>
+          {{p.title}}
+          </ion-label>
+    </ion-item>
+  </ion-menu-toggle>
+<ion-item button *ngIf="p.children?.length > 0"click="p.open = !p.open"
+  [class.active-parent]="" detail="false">
+</ion-item>
+</div>
+</ion-content>
+</ion-menu>
+<router-outlet id="content" main></router-outlet>
