@@ -8,7 +8,51 @@
     </ion-title>
   </ion-toolbar>
 </ion-header>
+<div class="flex">
+  <ion-button color="success" shape="round" type="submit" (click)="butEnvoie()">
+    <ion-icon slot="start" name="send"></ion-icon>
+    envoie
+  </ion-button>
+  <ion-button color="primary" shape="round" type="submit" (click)="butRetrait()">
+    <ion-icon slot="start" name="checkmark-circle"></ion-icon>
+    retrait
+  </ion-button>
+</div>
 <ion-content color="" padding class="backForm">
+    <div *ngIf="trans">
+    <form #form="ngForm" (ngSubmit)="verifier(form)">
+        <ion-grid>
+            <ion-row color="" justify-content-center>
+              <ion-col align-self-center size-md="6" size-lg="5" size-xs="12">
+                <div text-center>
+                  <h3>retrait</h3>
+                </div>
+                <div padding>
+                    <ion-item>
+                      <ion-input name="codeSecret" type="number" placeholder="codeSecret" #codeSecret="ngModel" [(ngModel)]="valide.codeSecret"   required></ion-input>
+                   </ion-item>
+                </div>
+              </ion-col>
+            </ion-row>
+          </ion-grid>
+          <ion-list  *ngIf="code">
+              <ion-item >
+                  <ion-label>
+                      <h2>montant {{code.montantTransaction}} fcfa</h2>
+                    <h3> tarif {{code.tarifs.frais}} fcfa</h3>
+                  </ion-label>
+                </ion-item>
+          </ion-list>
+            <ion-button  type="submit">verifier</ion-button>
+
+      </form>
+    
+     
+  
+    </div>
+     
+
+ <div *ngIf="!trans">
   <form #form="ngForm" (ngSubmit)="envoi(form)">
     <ion-grid *ngIf="!next">
       <ion-row color="" justify-content-center>
@@ -33,7 +77,6 @@
         </ion-col>
       </ion-row>
     </ion-grid>
-    
     <ion-grid *ngIf="next">
       <ion-row color="" justify-content-center>
         <ion-col align-self-center size-md="6" size-lg="5" size-xs="12">
@@ -68,12 +111,11 @@
               <ion-input name="montantTransaction" type="number" placeholder="montant" #montantTransaction="ngModel" [(ngModel)]="EnvoiData.montantTransaction"  class="form-control" (keyup)="frais($event)" required></ion-input>
               <div class="validation-error text-danger" *ngIf="montantTransaction.invalid && montantTransaction.touched">je veux savoir le montant .</div>
         </ion-item>
-        <ion-item>
-          <div *ngIf="tarif">frais {{tarif.frais}} fcfa</div>
-          
-            <ion-label>frais à ma charge</ion-label>
-            <ion-toggle [(ngModel)]="wiki" color="success"></ion-toggle>
-          
+        <ion-item *ngIf="tarif">
+          <div >frais {{tarif.frais}} fcfa</div>
+         <ion-item> <ion-label>avec</ion-label></ion-item>
+           
+            <ion-toggle name="ok" #ok="ngModel" [(ngModel)]="EnvoiData.ok" color="success"></ion-toggle>
         </ion-item>
           </div>
         </ion-col>
@@ -81,9 +123,10 @@
     </ion-grid>
 <div class="row send">
     <ion-button size="small"  (click)="nextForm()"   [disabled]="form.invalid" *ngIf="!next && !last" color="success" >Suivant</ion-button>
-    <ion-button color="danger" size="small"  (click)="nextForm()"  [disabled]="form.invalid" *ngIf="next && !last" >precedent</ion-button>
-    <ion-button color="success" size="small"  (click)="nextForm()"  [disabled]="form.invalid" *ngIf="!last" >Suivant</ion-button>
+    <ion-button color="danger" size="small"  (click)="nextForm()"  [disabled]="form.invalid" *ngIf="next && last" >precedent</ion-button>
+    <ion-button color="success" size="small"  (click)="nextForm()"  [disabled]="form.invalid" *ngIf="!last && next" >Suivant</ion-button>
     <ion-button color="secondary" size="large" type="submit" [disabled]="form.invalid"  *ngIf="last" expand="block">envoyer</ion-button>
   </div>
 </form>
+</div>
 </ion-content>

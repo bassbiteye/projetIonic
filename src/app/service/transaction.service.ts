@@ -1,3 +1,4 @@
+import { Transaction } from './../model/transaction';
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http'
 import { Partenaire } from '../model/partenaire';
@@ -7,11 +8,10 @@ import { Partenaire } from '../model/partenaire';
 })
 export class TransactionService {
   private url = "http://localhost:8000/api";
-
+  selectedTrans :Transaction;
   constructor(private http: HttpClient) { }
   envoi(envoi) {
     return this.http.post<any>(this.url+'/envoi', envoi)
-    //return this.http.post<any>(this._addPar, partenaire,this.headers)
   }
   retrait(retrait) {
     return this.http.post<any>(this.url+'/retrait', retrait)

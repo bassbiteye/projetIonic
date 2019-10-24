@@ -10,6 +10,8 @@ const routes: Routes = [
   { path: 'register', loadChildren: './register/register.module#RegisterPageModule' },
   { path: 'addpar', loadChildren: './pages/partenaire/addpar/addpar.module#AddparPageModule' },
   { path: 'envoi', loadChildren: './pages/envoi/envoi.module#EnvoiPageModule' },
+  { path: 'details', loadChildren: './pages/details/details.module#DetailsPageModule' },
+  { path: 'view', loadChildren: './pages/view/view.module#ViewPageModule' },
 ];
 
 @NgModule({

@@ -60,38 +60,15 @@ export class AuthService {
   loginUser(User) {
     return this.http.post<any>(this.url + '/login', User).pipe(catchError(this.errorHandler))
   }
-
-/* getUser(id): Observable<User> {
-  return this.http.get<User>(this.url + '/userid/' + id);
-}
-
-affecter(id, User): Observable<User> {
-  return this.http.post<User>(this.url + '/affecter/' + id,
-  JSON.stringify(User));
-} */
   logoutUser() {
-    localStorage.removeItem('token')
-    localStorage.removeItem('username');
+    localStorage.removeItem('token');
     localStorage.removeItem('roles');
-    localStorage.removeItem('nom');
-    localStorage.removeItem('prenom');
-    localStorage.removeItem('expiration');
-    localStorage.removeItem('imageName');
-    localStorage.removeItem('message');
-    this._router.navigate(['/login'])
-  }
-  deconnect() {
-    localStorage.removeItem('token')
-    localStorage.removeItem('username');
-    localStorage.removeItem('roles');
-    localStorage.removeItem('nom');
-    localStorage.removeItem('prenom');
     localStorage.removeItem('expiration');
     localStorage.removeItem('imageName');
     localStorage.removeItem('message');
     this._router.navigate(['/login']);
-    window.location.reload();
   }
+ 
   getToken() {
     return localStorage.getItem('token');
   }

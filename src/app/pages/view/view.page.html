@@ -1,0 +1,17 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>detail</ion-title>
+    <ion-back-button></ion-back-button>
+  </ion-toolbar>
+</ion-header>
+  <ion-content>
+<ion-card>
+  <ion-card-header>
+    <ion-card-subtitle>date {{detail.dateEnvoi || detail.dateRetrait |date: 'dd/MM/yyyy H:mm' }}</ion-card-subtitle>
+    <ion-card-title>montant {{detail.montantTransaction}} fcfa</ion-card-title>
+  </ion-card-header>
+  <ion-card-content>
+      tarif {{detail.montantTransaction}} fcfa
+  </ion-card-content>
+</ion-card>
+  </ion-content>

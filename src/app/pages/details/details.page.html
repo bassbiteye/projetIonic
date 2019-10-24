@@ -1,0 +1,64 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>details</ion-title>
+  </ion-toolbar>
+</ion-header>
+<ion-content class="main-content">
+      <ion-list-header>
+        details transactions
+      </ion-list-header>
+    <form  role="form" [formGroup]="form" novalidate>
+        <ion-item class="form-group">
+          <ion-label >date debut</ion-label>
+          <ion-datetime formControlName="dateFrom" displayFormat="MMM D, YYYY" type="date" useValueAsDate></ion-datetime>
+       
+        </ion-item>
+        <ion-item class="form-group">
+          <ion-label>date fin</ion-label>
+          <ion-datetime formControlName="dateTo" displayFormat="MMM D, YYYY" type="date"  useValueAsDate ></ion-datetime>
+        </ion-item>
+ 
+      <div class="flex">
+        <ion-button color="success" shape="round" type="submit" (click)="onSubmit()">
+          <ion-icon slot="start" name="send"></ion-icon>
+          envoie
+        </ion-button>
+        <ion-button color="primary" shape="round" type="submit" (click)="inSubmit()">
+          <ion-icon slot="start" name="checkmark-circle"></ion-icon>
+          retrait
+        </ion-button>
+      </div>
+   </form>
+   <div class="bar bar-header bar-dark">
+
+      <ion-segment ng-model="operations" (ionChange)="segmentChanged($event)"  assertive>
+      <ion-segment-button value="Transactions" checked (click)="butTran()">
+        Transactions
+      </ion-segment-button>
+      <ion-segment-button value="Commissions"  (click)="butCom()">
+        Commissions
+      </ion-segment-button>
+      
+    </ion-segment>
+      </div>
+    
+      <div ng-switch="operations">
+    
+        <ion-list ng-switch-when="Transactions" *ngIf="!trans">
+            <ion-item *ngFor="let d of detail" (click)="goToView(d)" detail>
+                <ion-label>
+                    <h2>montant {{d.montantTransaction}} fcfa</h2>
+                  <h3> tarif {{d.tarifs.frais}} fcfa</h3>
+                </ion-label>
+              </ion-item>
+        </ion-list>
+    
+        <ion-list ng-switch-when="Commissions" *ngIf="trans">
+            <ion-item *ngFor="let d of detail" (click)="goToView(d)" detail>
+                <ion-label>
+                    <h2>commission {{d.comEnvoie || d.comRetrait }} fcfa</h2>
+                </ion-label>
+              </ion-item>
+        </ion-list>    
+      </div> 
+</ion-content>

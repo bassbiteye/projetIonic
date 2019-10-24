@@ -1,8 +1,9 @@
-import { NavController,LoadingController } from '@ionic/angular';
+import { NavController, LoadingController } from '@ionic/angular';
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../service/auth.service';
 import { Router } from '@angular/router';
 import { JwtHelperService } from '@auth0/angular-jwt';
+import { Storage } from '@ionic/storage';
 
 @Component({
   selector: 'app-home',
@@ -15,15 +16,16 @@ export class HomePage {
   jwt = new JwtHelperService;
   message :  any;
   nom :  any;
-  prenom :  any;findallCompte
+  prenom :  any; findallCompte
   imageName : any;
-  roles :any
-  valuRole= false;
+  roles : any
+  valuRole = false;
   loading : any;
 
-  constructor(private _auth:AuthService,
+  constructor(private _auth: AuthService,
               private _router: Router,
-              private loadingCtl: LoadingController) { }
+              private loadingCtl: LoadingController,
+              private storage: Storage) { }
 
 async presentLoading() {
   const loading = await this.loadingCtl.create({
@@ -39,45 +41,25 @@ async presentLoading() {
   login (form) {
 
     this._auth.loginUser(form.value).subscribe((res) => {
-           if(!res.code){
+           if (!res.code) {
              this.presentLoading();
              localStorage.setItem('token', res.token);
-             const Decode=this.jwt.decodeToken(res.token);
-             localStorage.setItem('username', Decode.username);
-             localStorage.setItem('roles', Decode.roles[0]);
-             localStorage.setItem('nom', Decode.nom);
-             localStorage.setItem('prenom', Decode.prenom);
-             localStorage.setItem('expiration', Decode.exp);
-             localStorage.setItem('imageName', Decode.imageName);
-             this.prenom= res.prenom;
-             this.imageName= res.imageName;
-             this.nom= res.nom;
-             this.roles= res.roles;
-             this.authenticate();
+             const Decode = this.jwt.decodeToken(res.token);
+             this.storage.set('roles', Decode.roles[0]);
+             this.storage.set('expiration', Decode.exp);
+             this.storage.set('imageName', Decode.imageName);
+             this.imageName = res.imageName;
+             this.roles = res.roles;
              this._router.navigateByUrl('acceuil');
-        }else{
+        } else {
           this.presentLoading();
-          localStorage.setItem('message',res.message);
+          localStorage.setItem('message', res.message);
           this.message = res.message;
         }
 
       },
-      err => console.log('err' ,err.message)
-    )
-  }
-  isAuthenticate(){
-    console.log('ceci est un test', this.roles)
-
-    return !this.roles && (this.roles=="ROLE_SUPER"||this.roles=="ROLE_ADMIN"||this.roles=="ROLE_USERS"||this.roles=="ROLE_CAISSIER")
+      err => console.log('err' , err.message)
+    );
   }
 
-  authenticate() {
-    if(this.roles){
-      this.valuRole = true;
-    }
-    else{
-      this.valuRole = false;
-    }
-    return this.valuRole;
-  }
 }
