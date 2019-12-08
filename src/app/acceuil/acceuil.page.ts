@@ -12,10 +12,8 @@ import { HttpErrorResponse } from '@angular/common/http';
 
 export class AcceuilPage implements OnInit {
   info: any;
-
-
- 
-  
+  public show = false;
+  valeur: any;
   constructor(private menu: MenuController,
               // tslint:disable-next-line: variable-name
               private _router: Router,
@@ -36,5 +34,12 @@ export class AcceuilPage implements OnInit {
           }
         }
     );
+  }
+  toggleSolde() {
+    if (this.valeur) {
+      this.valeur = false;
+    } else {
+      this.valeur = true;
+    }
   }
 }

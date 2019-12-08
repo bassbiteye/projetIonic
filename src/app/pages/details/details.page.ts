@@ -27,31 +27,29 @@ export class DetailsPage implements OnInit {
                public alertController: AlertController,
                public navCtrl: NavController,
                private router :Router
-               ) {
-      }
+               ) {} 
 
       form = new FormGroup({
         dateFrom : new FormControl(this.today, Validators.required),
         dateTo : new FormControl(this.today, Validators.required)
-      })
-      dateLessThan(from: string, to: string) {
+      });
+       dateLessthan(from: string, to: string) {
         return (group: FormGroup): {[key: string]: any} => {
           const f = group.controls[from];
           const t = group.controls[to];
-          const now = new Date();
           if (f.value > t.value) {
             return {
               dates: 'Date de debut doit etre plus petit que Date de fin'
             };
           }
-          if (t.value > now) {
+          if (t.value > this.today) {
             return {
               dates: 'Date de fin doit etre plus grand  qu aujourd hui'
             };
           }
           return {};
         };
-      }
+      } 
 onSubmit() {
   this._detail.detailEnvoi(this.form.value)
   .subscribe(

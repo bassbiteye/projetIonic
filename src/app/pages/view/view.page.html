@@ -1,17 +1,52 @@
 <ion-header>
-  <ion-toolbar>
-    <ion-title>detail</ion-title>
-    <ion-back-button></ion-back-button>
-  </ion-toolbar>
+    <ion-toolbar>
+        <ion-buttons slot="start">
+            <ion-back-button></ion-back-button>
+        </ion-buttons>
+        <ion-title>
+            détail transaction
+        </ion-title>
+    </ion-toolbar>
 </ion-header>
-  <ion-content>
-<ion-card>
-  <ion-card-header>
-    <ion-card-subtitle>date {{detail.dateEnvoi || detail.dateRetrait |date: 'dd/MM/yyyy H:mm' }}</ion-card-subtitle>
-    <ion-card-title>montant {{detail.montantTransaction}} fcfa</ion-card-title>
-  </ion-card-header>
-  <ion-card-content>
-      tarif {{detail.montantTransaction}} fcfa
-  </ion-card-content>
-</ion-card>
-  </ion-content>
+<ion-content>
+    <ion-card>
+        <ion-card-header>
+            <h4>date
+                {{detail.dateEnvoi || detail.dateRetrait |date: 'dd/MM/yyyy H:mm' }}</h4>
+
+        </ion-card-header>
+        <ion-card-content>
+
+            <ion-item>
+                <ion-label>expéditeur
+                    {{detail.expediteur.nomE}}
+                    {{ detail.expediteur.prenomE}}
+                </ion-label>
+            </ion-item>
+            <ion-item>
+                <ion-label>Recepteur
+                    {{detail.beneficiaire.nomb}}
+                    {{ detail.beneficiaire.prenomb}}
+                </ion-label>
+            </ion-item>
+            <ion-item>
+                <ion-label>montant
+                    {{detail.montantTransaction}}
+                    fcfa
+                </ion-label>
+            </ion-item>
+            <ion-item>
+                <ion-label>tarif
+                    {{detail.tarifs.frais}}
+                    fcfa
+                </ion-label>
+            </ion-item>
+            <ion-item>
+                <ion-label>commission
+                    {{detail.comRetrait || detail.comEnvoie }}
+                    fcfa</ion-label>
+            </ion-item>
+        </ion-card-content>
+
+    </ion-card>
+</ion-content>

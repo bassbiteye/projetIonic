@@ -1,10 +1,8 @@
-import { Component, OnInit,ViewChild,ElementRef } from '@angular/core';
+import { Component, OnInit} from '@angular/core';
 import { TransactionService } from '../../service/transaction.service';
 import { Router } from '@angular/router';
 import { HttpErrorResponse } from '@angular/common/http';
 import { AuthService } from '../../service/auth.service';
-import Swal from 'sweetalert2';
-import * as jsPDF from 'jspdf';
 import { AlertController } from '@ionic/angular';
 
 @Component({
@@ -33,12 +31,12 @@ export class EnvoiPage implements OnInit {
       this._authService.getInfo().subscribe(
         res => {
           this.info = res 
-          console.log(this.info)
+          console.log(this.info);
         },
         err => {
          if ( err instanceof HttpErrorResponse ) {
            if (err.status === 401) {
-             this._authService.logoutUser();   
+             this._authService.logoutUser();
                 }
          }
        }
@@ -46,23 +44,11 @@ export class EnvoiPage implements OnInit {
     }
 
   envoi() {
-
     this._trans.envoi(this.EnvoiData)
     .subscribe(
       res => {
-
-          if (res.message) {
-            Swal.fire({
-              type: 'success',
-                title: res.message,
-                showConfirmButton: true,
-
-            });
-        }
-          console.log(res);
-
-
-          this._router.navigate(['/accueil']);
+        console.log(res);
+    
       },
       err => {
         if ( err instanceof HttpErrorResponse ) {
@@ -96,46 +82,42 @@ export class EnvoiPage implements OnInit {
        this._trans.verifier(this.valide)
        .subscribe(
       res => {
-         this.code = res
-         console.log(this.code)
+         this.code = res;
+        
+         if (res.status === 200){
+          this.presentAlert(res.message);
+     }
      },
       err => {
+        if (err.message) {
+          console.log(err);
+          this.presentAlert(err.error.message);
+     }
         if ( err instanceof HttpErrorResponse ) {
-          if (err.status === 500) {
-            this.presentAlert(err.message);
-        }
-          if ( err instanceof HttpErrorResponse ) {
              if (err.status === 401) {
                this._authService.logoutUser();             }
            }
           }
-         }
-
        )
-     
     }
 
      retrait(){
        this._trans.retrait(this.valide)
        .subscribe(
          res => {
-           if (res) {
-            
-           }
-           if (res.status){
-         
-         //  this._router.navigate(['/depot'])
-         }
            if (res.message){
-
+            this.presentAlert(res.message)
        }
        },
          err => {
-           if ( err instanceof HttpErrorResponse ) {
+          if (err.message) {
+            console.log(err);
+            this.presentAlert(err.error.message);
+       }
+          if ( err instanceof HttpErrorResponse ) {
              if (err.status === 401) {
                this._authService.logoutUser();             }
            }
-  
          }
        )
      }

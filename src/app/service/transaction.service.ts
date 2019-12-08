@@ -7,7 +7,7 @@ import { Partenaire } from '../model/partenaire';
   providedIn: 'root'
 })
 export class TransactionService {
-  private url = "http://localhost:8000/api";
+  private url = "http://symfony.sn:81/api";
   selectedTrans :Transaction;
   constructor(private http: HttpClient) { }
   envoi(envoi) {

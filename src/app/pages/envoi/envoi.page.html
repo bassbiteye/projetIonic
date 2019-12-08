@@ -1,13 +1,15 @@
 <ion-header>
-  <ion-toolbar>
-    <ion-buttons slot="start">
-      <ion-back-button></ion-back-button>
-      </ion-buttons>
-    <ion-title>
-       envoi
-    </ion-title>
-  </ion-toolbar>
-</ion-header>
+    <ion-toolbar>
+      <ion-buttons slot="start">
+        <ion-back-button></ion-back-button>
+        </ion-buttons>
+      <ion-title>
+         transaction
+      </ion-title>
+    </ion-toolbar>
+  </ion-header>
+  <ion-content color="" padding>
+
 <div class="flex">
   <ion-button color="success" shape="round" type="submit" (click)="butEnvoie()">
     <ion-icon slot="start" name="send"></ion-icon>
@@ -18,7 +20,6 @@
     retrait
   </ion-button>
 </div>
-<ion-content color="" padding class="backForm">
     <div *ngIf="trans">
     <form #form="ngForm" (ngSubmit)="verifier(form)">
         <ion-grid>
@@ -35,18 +36,26 @@
               </ion-col>
             </ion-row>
           </ion-grid>
+          <ion-button  type="submit">verifier</ion-button>
+        </form >
           <ion-list  *ngIf="code">
               <ion-item >
                   <ion-label>
                       <h2>montant {{code.montantTransaction}} fcfa</h2>
-                    <h3> tarif {{code.tarifs.frais}} fcfa</h3>
+                    <h3> expéditeur {{code.expediteur.prenomE}}  {{code.expediteur.nomE}}</h3>
                   </ion-label>
                 </ion-item>
+                <form #form="ngForm" (ngSubmit)="retrait(form)">
+                <div padding>
+                    <ion-item>
+                      <ion-input name="cni" type="number" placeholder="cni" #cni="ngModel" [(ngModel)]="valide.cni"   required></ion-input>
+                   </ion-item>
+                </div>
+                <ion-button  type="submit">retirer</ion-button>
+                </form>
           </ion-list>
-            <ion-button  type="submit">verifier</ion-button>
+      
 
-      </form>
-    
      
   
     </div>

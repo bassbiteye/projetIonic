@@ -7,32 +7,38 @@
 </ion-header>
 
 <ion-content>
-  <section text-center margin-bottom>
+  
+
+  <section text-center margin-bottom> 
     <ion-icon name="person"></ion-icon>
     <h1 style="font-size:1.4em" no-margin  *ngFor="let info of info" >Welcome, <br>
       {{info.prenom}} {{info.nom}}</h1>
-  </section>
-  <ion-item>
-    <ion-badge slot="start"></ion-badge>
-    <ion-button  *ngIf="!_trans" routerLink="/envoi"  routerLinkActive="active">Transaction</ion-button>
-    <ion-badge slot="end"><ion-icon name="send"></ion-icon></ion-badge>
-  </ion-item>
-
-  <ion-item>
-    <ion-badge slot="start"></ion-badge>
-    <ion-button  *ngIf="!_trans" routerLink="/details"  routerLinkActive="active">detail</ion-button>
-    <ion-badge slot="end"><ion-icon name="sync"></ion-icon></ion-badge>
-  </ion-item>
+  </section> 
   
 
-  
+<ion-item *ngFor="let info of info">
+  <ion-label>solde 
+    <p  color="secondary" *ngIf="valeur">{{info.Compte.solde}} fcfa</p>
+  </ion-label>
+  <ion-icon  name="eye" (click)="toggleSolde()" slot="end"></ion-icon>
+</ion-item>
+  <ion-card mode="ios" color="success">
+    <ion-card-content>
+        <ion-label  *ngIf="!_trans" routerLink="/details"  routerLinkActive="active" detail>detail</ion-label>
+    </ion-card-content>
+  </ion-card>
+  <ion-card color="primary">
+      <ion-card-content>
+          <ion-label  *ngIf="!_trans" routerLink="/envoi"  routerLinkActive="active">Transfert</ion-label>
+        </ion-card-content>
+    </ion-card>
+    
+    
+    
 </ion-content>
-
-
-<ion-content></ion-content>
 
 <ion-footer>
   <ion-toolbar>
-    <ion-title>Deconnexion</ion-title>
+    <ion-title (click)="_auth.logoutUser()"><ion-icon name="log-out"></ion-icon>Deconnexion</ion-title>
   </ion-toolbar>
 </ion-footer>
