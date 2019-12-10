@@ -1,18 +1,9 @@
-<ion-header>
-  <ion-toolbar>
-    <ion-title>
-       fatftat transfert
-    </ion-title>
-  </ion-toolbar>
-</ion-header>
-
-
 
 <ion-content >
     <div class="padding">
       
       <div class="logo">
-        {# <ion-icon color="light" name="sunny"></ion-icon> #}
+     <!-- <ion-icon color="light" name="sunny"></ion-icon> -->
         <!-- <ion-icon color="light" name="contact"></ion-icon> -->
         <!-- <ion-icon color="light" name="cloudy-night"></ion-icon> -->
     <img src="../../assets/logo.png"> 
@@ -32,7 +23,7 @@
       <ion-item lines="none"  *ngIf="message">
           <ion-label text-center color="danger">{{message}}</ion-label>
         </ion-item>
-  <br>
+        <br>
       <ion-button color="light" expand="block" shape="round" fill="outline" type="submit" [disabled]="form.invalid" >Connexion</ion-button>
       <br>
     </form>

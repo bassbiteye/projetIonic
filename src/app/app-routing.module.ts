@@ -12,6 +12,7 @@ const routes: Routes = [
   { path: 'envoi', loadChildren: './pages/envoi/envoi.module#EnvoiPageModule' },
   { path: 'details', loadChildren: './pages/details/details.module#DetailsPageModule' },
   { path: 'view', loadChildren: './pages/view/view.module#ViewPageModule' },
+  { path: 'detail-par', loadChildren: './pages/detail-par/detail-par.module#DetailParPageModule' },
 ];
 
 @NgModule({

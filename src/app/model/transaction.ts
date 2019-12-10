@@ -1,6 +1,6 @@
 export interface Transaction {
 
-    montantTransaction: string;
+    montantTransaction: number;
     dateEnvoi: Date;
     comEtat :number;
     comEnvoie :number;

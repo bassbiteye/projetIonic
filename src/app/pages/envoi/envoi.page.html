@@ -79,7 +79,7 @@
                     <div class="validation-error text-danger" *ngIf="prenomE.invalid && prenomE.touched">je veux savoir votre prenom aussi.</div>
                   </ion-item>
               <ion-item>
-                  <ion-input name="telephoneE" type="text" placeholder="telephone" #telephoneE="ngModel" [(ngModel)]="EnvoiData.telephoneE"  class="form-control" required></ion-input>
+                  <ion-input name="telephoneE" type="number" placeholder="telephone" #telephoneE="ngModel" [(ngModel)]="EnvoiData.telephoneE"  class="form-control" required></ion-input>
                   <div class="validation-error text-danger" *ngIf="telephoneE.invalid && telephoneE.touched">je veux savoir votre numéro.</div>
             </ion-item>
           </div>

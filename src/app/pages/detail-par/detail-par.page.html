@@ -1,0 +1,81 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+      </ion-buttons>
+    <ion-title>
+       transaction
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+<ion-content class="main-content">
+    <ion-list-header>
+      transactions
+    </ion-list-header>
+  <form  role="form" [formGroup]="form"novalidate>
+      <ion-item class="form-group">
+        <ion-label >date debut</ion-label>
+        <ion-datetime formControlName="dateFrom" displayFormat="MMM D, YYYY" type="date" useValueAsDate></ion-datetime>
+     
+      </ion-item>
+      <ion-item class="form-group">
+        <ion-label>date fin</ion-label>
+        <ion-datetime formControlName="dateTo" displayFormat="MMM D, YYYY" type="date"  useValueAsDate ></ion-datetime>
+      </ion-item>
+
+    <div class="flex">
+      <ion-button color="success" shape="round" type="submit" (click)="onSubmit()">
+        <ion-icon slot="start" name="send"></ion-icon>
+        envoie
+      </ion-button>
+      <ion-button color="primary" shape="round" type="submit" (click)="inSubmit()">
+        <ion-icon slot="start" name="checkmark-circle"></ion-icon>
+        retrait
+      </ion-button>
+    </div>
+ </form>
+ <div class="bar bar-header bar-dark">
+
+    <ion-segment ng-model="operations" (ionChange)="segmentChanged($event)"  assertive>
+    <ion-segment-button value="Transactions" checked (click)="butTran()" layout="icon-start"> 
+      <ion-label>transactions</ion-label>
+      <ion-icon name="sync"></ion-icon>
+    </ion-segment-button>
+    <ion-segment-button value="Commissions"  (click)="butCom()" layout="icon-start">
+      <ion-label>commissions</ion-label>
+      <ion-icon name="add-circle-outline"></ion-icon>
+    </ion-segment-button>
+    
+  </ion-segment>
+    </div>
+  
+    <div ng-switch="operations">
+  
+      <ion-list ng-switch-when="Transactions" *ngIf="!trans">
+          <ion-list *ngFor="let d of detail">  
+        <ion-item >
+              <ion-label>Date {{d.dateEnvoi || d.dateRetrait |date: 'dd/MM/yyyy H:mm' }}</ion-label>
+          </ion-item>
+          <ion-item  (click)="goToView(d)" detail>
+                  <ion-label>montant {{d.montantTransaction  }} fcfa</ion-label>
+                <p> tarif {{d.tarifs.frais}} fcfa</p>
+                
+
+          </ion-item>
+        </ion-list>     
+      </ion-list>
+  
+      <ion-list ng-switch-when="Commissions" *ngIf="trans">
+          <ion-list *ngFor="let d of detail">  
+              <ion-item >
+                    <ion-label>Date {{d.dateEnvoi || d.dateRetrait |date: 'dd/MM/yyyy H:mm' }}</ion-label>
+                </ion-item>
+                <ion-item  (click)="goToView(d)" detail>
+                    <ion-label>
+                        <h2>commission {{d.comEnvoie || d.comRetrait }} fcfa</h2>
+                    </ion-label>                     
+                </ion-item>
+              </ion-list>    
+      </ion-list>    
+    </div> 
+</ion-content>
