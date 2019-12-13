@@ -10,9 +10,9 @@ import { Observable } from 'rxjs';
 @Injectable(
 )
 export class AuthService {
-  private log = 'http://symfony.sn:81/api';
+  private log = '192.168.1.5:81/api';
 
-  private url = 'http://symfony.sn:81/api';
+  private url = '192.168.1.5:81/api';
   private headers = { headers: new HttpHeaders().set('Authorization', 'Bearer ' + localStorage.getItem('token')) };
   // tslint:disable-next-line: new-parens
   jwt = new JwtHelperService;
@@ -22,7 +22,7 @@ export class AuthService {
 
   registerUser(User) {
 
-    const urerUrl = 'http://symfony.sn:81/api/register';
+    const urerUrl = '192.168.1.5:81/api/register';
     const formData: FormData = new FormData();
     formData.append('imageName', User.imageName);
     formData.append('username', User.username);
