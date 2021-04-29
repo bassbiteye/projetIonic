@@ -34,7 +34,7 @@
     "cordova-plugin-file": "6.0.2",
     "cordova-plugin-file-opener2": "2.2.1",
     "core-js": "^2.5.4",
-    "jspdf": "^1.5.3",
+    "jspdf": "^2.3.1",
     "pdfmake": "^0.1.62",
     "rxjs": "~6.5.1",
     "sweetalert2": "^8.18.3",
